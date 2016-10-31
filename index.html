@@ -1,0 +1,80 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>PMN Chart Generator</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="css/global.css">
+	
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
+	<script src="js/scripts.min.js"></script>
+</head>
+
+<body>
+	
+<div class="page-wrap">
+	<div class="col lCol">
+		<header class="side-title" role="banner">
+			<h3><span>Settings</span> <a href="#" id="clear-fields">clear fields</a></h3>
+			<form>
+				<div class="field-wrapper" id="type-field-wrap">
+					<label for="chart-type">Type <span>*</span></label>
+					<select id="chart-type">
+						<option value="pie">Pie Chart</option>
+						<option value="doughnut">Doughnut Chart</option>
+						<option value="polarArea">Polar Area Chart</option>
+						<option value="bar">Bar Chart</option>
+						<option value="line">Line Chart</option>
+						<option value="radar">Radar Chart</option>
+						<option value="bubble">Bubble Chart</option>
+					</select>
+				</div>
+				<div class="field-wrapper" id="title-field-wrap">
+					<label for="chart-title">Title <span>*</span></label>
+					<input type="text" id="chart-title" placeholder="examplechart1"/>
+				</div>
+				<div class="field-wrapper" id="data-field-wrap">
+					<label for="chart-data">Data</label>
+					<input type="text" id="chart-data" placeholder="20, 30, 50"/>
+				</div>
+				<div class="field-wrapper" id="labels-field-wrap">
+					<label for="chart-labels">Labels</label>
+					<input type="text" id="chart-labels" placeholder="Red, Blue, Yellow"/>
+				</div>
+				<div class="field-wrapper" id="colors-field-wrap">
+					<label for="chart-color">Colors</label>
+					<div class="colors-wrap"></div>
+					<p class="description nm">The number of colors available reflects the amount of data you have entered.</p>
+				</div>
+				<div class="field-wrapper" id="colors-field-wrap">
+					<label for="chart-color">Border Colors</label>
+					<div class="border-colors-wrap"></div>
+					<p class="description nm">The number of colors available reflects the amount of data you have entered.</p>
+				</div>
+				<div class="field-wrapper" id="opacity-field-wrap">
+					<label for="chart-opacity">Opacity</label>
+					<input type="number" id="chart-opacity" min="1" max="100" value="100"/>
+					<p class="description">Choose a percentage value between 1 and 100.</p>
+				</div>
+			</form>
+		</header><!--/side-title-->
+	</div><!--/lCol-->
+	<div class="col rCol">
+		<header class="title" role="banner">
+			<h1>Chart Generator</h1>
+		</header><!--/title-->
+
+		<main class="content-wrapper" role="region">
+			<div id="generatedChart-wrap" style="max-width: 500px;"><canvas id="generatedChart" width="500" height="500"></canvas></div>
+		</main><!--/content-wrapper-->
+	</div><!--/rCol-->
+</div><!--/page-wrap-->
+
+</body>
+</html>

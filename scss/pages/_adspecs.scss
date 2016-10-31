@@ -1,0 +1,812 @@
+/* ===========================================================
+   AD SPECS
+=========================================================== */
+
+/* The Inquirer Ad Positions */
+.ad-positions-inq {
+	@extend %clearfix;
+	position: relative;
+	max-width: 500px;
+	margin: 0 auto;
+
+	.cycle-sentinel { display: none !important; height: 0; }
+
+	.ad-pos-inq-nav {
+		display: none;
+
+		&.active { display: block; }
+		
+		a {
+			@include transition(all, 0.2s);
+			position: absolute;
+			top: 50%;
+			margin-top: -12px;
+			z-index: 399;
+			display: block;
+			width: 24px;
+			height: 24px;
+			background: rgb(255, 59, 43);
+			background: rgba(255, 59, 43, 0.7);
+			border-radius: 50%;
+
+			&:before {
+				@include valign;
+				display: block;
+				content: '';
+				width: 0;
+				height: 0;
+				margin-left: 8px;
+				border-style: solid;
+				border-width: 7.5px 0 7.5px 10px;
+				border-color: transparent transparent transparent #ffffff;
+			}
+
+			span {
+				display: none;
+			}
+
+			&.prev {
+				@include rotate(180);
+				left: 10px;
+			}
+
+			&.next {
+				right: 10px;
+			}
+
+			.no-touch &:hover {
+				background: $red;
+			}
+		}
+	}
+
+	.ad-position {
+		position: relative;
+		float: left;
+		background: $teal-dk;
+		width: 18.36%;
+		height: 192px;
+		margin-left: 2%;
+		margin-bottom: 10px;
+
+		&.first {
+			margin-left: 0;
+			clear: left;
+		}
+
+		&.two-col {
+			width: 38.8%;
+		}
+
+		span {
+			@extend %clearfix;
+			position: absolute;
+			display: block;
+			background: $teal;
+			color: #fff;
+
+			label {
+				display: block;
+				font: bold 17px/18px $font-century;
+				color: #fff;
+				text-transform: uppercase;
+				text-align: center;
+
+				&.sm {
+					font-size: 12px;
+					line-height: 15px;
+				}
+
+				&.xs {
+					font-size: 9px;
+					line-height: 11px;
+				}
+			}
+
+			&.double-truck {
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+
+				label {
+					margin-top: 112px;
+				}
+			}
+
+			&.half-double-truck {
+				top: 50%;
+				left: 0;
+				right: 0;
+				bottom: 0;
+
+				label {
+					margin-top: 30px;
+				}
+			}
+
+			&.full-page {
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+
+				label {
+					margin-top: 120px;
+					margin-right: 5px;
+					float: right;
+				}
+			}
+
+			&.half-horz {
+				top: 50%;
+				left: 0;
+				right: 0;
+				bottom: 0;
+
+				label {
+					margin-top: 50px;
+				}
+			}
+
+			&.quarter-page {
+				top: 50%;
+				left: 0;
+				right: 50%;
+				bottom: 0;
+
+				label {
+					position: absolute;
+					top: 50px;
+					left: 12px;
+					right: -12px;
+				}
+			}
+
+			&.junior-page {
+				top: 13.54%;
+				left: 0;
+				right: 16.3%;
+				bottom: 0;
+
+				label {
+					margin-top: 100px;
+				}
+			}
+
+			&.half-page-vert {
+				top: 0;
+				left: 0;
+				right: 50%;
+				bottom: 0;
+
+				label {
+					margin-top: 125px;
+				}
+			}
+
+			&.eighth-page {
+				top: 75%;
+				left: 0;
+				right: 50%;
+				bottom: 0;
+
+				label {
+					position: absolute;
+					top: -31px;
+					left: 0;
+				}
+			}
+
+			&.ninth-page {
+				top: 66.67%;
+				left: 0;
+				right: 66.67%;
+				bottom: 0;
+
+				label {
+					margin-top: 2px;
+				}
+			}
+
+			&.sixteenth-page {
+				top: 75%;
+				left: 0;
+				right: 66.67%;
+				bottom: 0;
+
+				label {
+					position: absolute;
+					top: -26px;
+					left: 0;
+				}
+			}
+
+			&.three-inch {
+				top: 84.4%;
+				left: 0;
+				right: 0;
+				bottom: 0;
+
+				label {
+					position: absolute;
+					top: -25px;
+					left: 15px;
+				}
+			}
+
+			&.two-inch {
+				top: 89.6%;
+				left: 0;
+				right: 0;
+				bottom: 0;
+
+				label {
+					margin-top: 4px;
+					margin-left: 7px;
+					text-align: left;
+				}
+			}
+
+			&.one-inch {
+				top: 93%;
+				left: 0;
+				right: 0;
+				bottom: 0;
+
+				label {
+					margin-top: 1px;
+					margin-right: 2px;
+					text-align: right;
+				}
+			}
+		}
+	}
+
+	@include bp($XS) {
+		max-width: 290px;
+		margin: 0 auto 5px;
+
+		.cycle-sentinel { display: block !important; }
+
+		.ad-position {
+			position: relative !important;
+			float: none;
+			display: inline-block;
+			width: 140px;
+			height: 140px;
+			margin-bottom: 5px;
+			margin-left: 0 !important;
+			margin-right: 5px;
+			white-space: normal !important;
+
+			&.first {
+				clear: none;
+			}
+
+			&.two-col {
+				width: 140px;
+			}
+
+			span {
+				&.double-truck {
+					label {
+						margin-top: 92px;
+					}
+				}
+
+				&.half-double-truck {
+					label {
+						margin-top: 20px;
+					}
+				}
+
+				&.full-page {
+					label {
+						margin-top: 90px;
+						margin-right: 10px;
+					}
+				}
+
+				&.half-page-vert {
+					label {
+						margin-top: 90px;
+					}
+				}
+
+				&.eighth-page {
+					label {
+						top: -18px;
+					}
+				}
+
+				&.sixteenth-page {
+					label {
+						top: -18px;
+					}
+				}
+
+				&.two-inch {
+					label {
+						margin-top: 2px;
+					}
+				}
+
+				&.one-inch {
+					label {
+						margin-top: 0;
+					}
+				}
+			}
+		}
+	}
+}
+
+/* Daily News Ad Positions */
+.ad-positions-dn {
+	@extend %clearfix;
+	position: relative;
+	margin: 0 auto;
+
+	.cycle-sentinel { display: none !important; height: 0; }
+
+	.ad-pos-dn-nav {
+		display: none;
+
+		&.active { display: block; }
+		
+		a {
+			@include transition(all, 0.2s);
+			position: absolute;
+			top: 50%;
+			margin-top: -12px;
+			z-index: 399;
+			display: block;
+			width: 24px;
+			height: 24px;
+			background: rgb(255, 255, 255);
+			background: rgba(255, 255, 255, 0.7);
+			border-radius: 50%;
+
+			&:before {
+				@include valign;
+				display: block;
+				content: '';
+				width: 0;
+				height: 0;
+				margin-left: 8px;
+				border-style: solid;
+				border-width: 7.5px 0 7.5px 10px;
+				border-color: transparent transparent transparent $red;
+			}
+
+			span {
+				display: none;
+			}
+
+			&.prev {
+				@include rotate(180);
+				left: 10px;
+			}
+
+			&.next {
+				right: 10px;
+			}
+
+			.no-touch &:hover {
+				background: #fff;
+			}
+		}
+	}
+
+	.ad-position {
+		position: relative;
+		float: left;
+		background: $maroon-dk;
+		width: 32%;
+		height: 200px;
+		margin-left: 2%;
+		margin-bottom: 13px;
+
+		&.first {
+			margin-left: 0;
+			clear: left;
+		}
+
+		&.two-col {
+			width: 66%;
+		}
+
+		span {
+			@extend %clearfix;
+			position: absolute;
+			display: block;
+			background: $maroon;
+			color: #fff;
+
+			label {
+				display: block;
+				font: bold 21px/23px $font-century;
+				color: #fff;
+				text-transform: uppercase;
+				text-align: center;
+			}
+
+			&.double-truck {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+
+				label {
+					margin-top: 90px;
+				}
+			}
+
+			&.full-page {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+
+				label {
+					margin-top: 90px;
+				}
+			}
+
+			&.half-page {
+				position: absolute;
+				top: 50%;
+				left: 0;
+				right: 0;
+				bottom: 0;
+
+				label {
+					margin-top: 35px;
+				}
+			}
+
+			&.quarter-page {
+				top: 60%;
+				left: 0;
+				right: 40%;
+				bottom: 0;
+
+				label {
+					margin-top: 20px;
+				}
+			}
+
+			&.eighth-page {
+				top: 70%;
+				left: 0;
+				right: 62%;
+				bottom: 0;
+
+				label {
+					margin-top: 8px;
+				}
+			}
+
+			&.sixteenth-page {
+				top: 70%;
+				left: 0;
+				right: 80%;
+				bottom: 0;
+
+				label {
+					position: absolute;
+					top: 5px;
+					left: 50px;
+					right: -50px;
+				}
+			}
+
+			&.two-inch-strip {
+				top: 80%;
+				left: 0;
+				right: 0;
+				bottom: 0;
+
+				label {
+					margin-top: 8px;
+				}
+			}
+
+			&.one-inch-strip {
+				top: 88%;
+				left: 0;
+				right: 0;
+				bottom: 0;
+
+				label {
+					margin-top: 1px;
+				}
+			}
+		}
+	}
+
+	@include bp($XS) {
+		max-width: 290px;
+		margin: 0 auto 5px;
+
+		.cycle-sentinel { display: block !important; }
+
+		.ad-position {
+			position: relative !important;
+			float: none;
+			display: inline-block;
+			width: 140px;
+			height: 140px;
+			margin-bottom: 4px;
+			margin-left: 0 !important;
+			margin-right: 5px;
+			white-space: normal !important;
+
+			&.first {
+				clear: none;
+			}
+
+			&.two-col {
+				width: 290px !important;
+			}
+
+			span {
+				label {
+					font-size: 18px;
+					line-height: 19px;
+				}
+
+				&.half-page {
+					label {
+						margin-top: 30px;
+					}
+				}
+
+				&.quarter-page {
+					label {
+						margin-top: 10px;
+					}
+				}
+
+				&.eighth-page {
+					label {
+						margin-top: 2px;
+					}
+				}
+
+				&.sixteenth-page {
+					label {
+						top: 2px;
+						left: 35px;
+						right: -35px;
+					}
+				}
+
+				&.two-inch-strip {
+					label {
+						margin-top: 4px;
+					}
+				}
+
+				&.one-inch-strip {
+					label {
+						margin-top: 0;
+						font-size: 15px;
+					}
+				}
+			}
+		}
+	}
+}
+
+table {
+	&.ad-units {
+		tr {
+			td {
+				&:nth-child(1) {
+					width: 40.6%;
+				}
+
+				&:nth-child(2) {
+					width: 30.3%;
+				}
+
+				&:nth-child(3) {
+					width: 29.1%;
+				}
+			}
+		}
+
+		tbody tr td:nth-child(2),
+		&:not(.digital) tbody tr td:nth-child(3) {
+			text-transform: none;
+		}
+	}
+
+	&.mechanicals,
+	&.page-depth {
+		tr {
+			td {
+				width: 33.33%;
+			}
+		}
+	}
+
+	&.deadlines {
+		tr {
+			td {
+				width: 20%;
+
+				&.hidden {
+					display: none;
+				}
+			}
+		}
+	}
+
+	&.responsive-units {
+		tr {
+			td {
+				width: 50%;
+			}
+		}
+	}
+
+	&.expanding-ad-units {
+		tr {
+			td {
+				width: 20%;
+			}
+		}
+	}
+
+	&.creative-time {
+		tr {
+			td {
+				width: 33.33%;
+			}
+		}
+	}
+
+	@include bp($M) {
+		&.deadlines {
+			text-align: left;
+
+			thead {
+				tr {
+					position: absolute;
+					top: -9999px;
+					left: -9999px;
+				}
+			}
+			tr {
+				td {
+					@include boxsize;
+					display: block;
+					position: relative;
+					width: 100%;
+					padding-left: 50%;
+
+					&+td {
+						border-left: 0;
+					}
+
+					&:before {
+						position: absolute;
+						top: 10px;
+						left: 10px;
+						width: 45%;
+						padding-right: 10px;
+						font-weight: bold;
+						white-space: nowrap;
+					}
+
+					&:nth-of-type(1):before {
+						content: 'Publication Day';
+					}
+
+					&:nth-of-type(2):before {
+						content: 'Section';
+					}
+
+					&:nth-of-type(3):before {
+						content: 'Reservation Deadlines';
+					}
+
+					&:nth-of-type(4):before {
+						content: 'Copy to Set Deadlines';
+					}
+
+					&:nth-of-type(5):before {
+						content: 'PDF (CR) Ad Deadline';
+					}
+
+					&.hidden {
+						display: block;
+					}
+				}
+			}
+		}
+
+		&.expanding-ad-units {
+			text-align: left;
+
+			thead {
+				tr {
+					position: absolute;
+					top: -9999px;
+					left: -9999px;
+				}
+			}
+			tr {
+				td {
+					@include boxsize;
+					display: block;
+					position: relative;
+					width: 100%;
+					padding-left: 50%;
+
+					&+td {
+						border-left: 0;
+					}
+
+					&:before {
+						position: absolute;
+						top: 10px;
+						left: 10px;
+						width: 45%;
+						padding-right: 10px;
+						font-weight: bold;
+						white-space: nowrap;
+					}
+
+					&:nth-of-type(1):before {
+						content: 'Ad Unit';
+					}
+
+					&:nth-of-type(2):before {
+						content: 'Collapsed Size';
+					}
+
+					&:nth-of-type(3):before {
+						content: 'Expanded Size';
+					}
+
+					&:nth-of-type(4):before {
+						content: 'Max # of Panels';
+					}
+
+					&:nth-of-type(5):before {
+						content: 'Panel Expansion Direction';
+					}
+
+					&.hidden {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+
+	@include bp($S) {
+		&.deadlines {
+			tr {
+				td {
+					padding-left: 10px;
+
+					&:before {
+						display: block;
+						position: relative;
+						top: auto;
+						left: auto;
+						width: auto;
+						padding-right: 0;
+					}
+				}
+			}
+		}
+	}
+}

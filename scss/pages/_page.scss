@@ -1,0 +1,408 @@
+/* ===========================================================
+   PAGE
+=========================================================== */
+.page-title {
+	padding: 20px 40px;
+
+	h1, h2 {
+		font: bold 40px/50px $font-default;
+		text-align: center;
+		text-transform: uppercase;
+		color: $red;
+	}
+
+	&.with-border {
+		h1, h2 {
+			padding-bottom: 10px;
+			border-bottom: 2px #808080 solid;
+		}
+	}
+
+	img {
+		display: block;
+		margin: 0 auto;
+	}
+
+	@include bp($M) {
+		padding: 20px;
+	}
+
+	@include bp($S) {
+		h1, h2 {
+			font: bold 30px/40px $font-default;
+		}
+	}
+}
+
+.content {
+	padding: 0 40px 40px;
+
+	&.padding-top {
+		padding-top: 20px;
+	}
+
+	&.lighter-text {
+		color: #787878;
+	}
+
+	h3 {
+		margin: 0 0 0.5em;
+		font: bold 20px/26px $font-default;
+	}
+
+	h4 {
+		margin: 0 0 0.25em;
+		font: bold 15px/20px $font-default;
+	}
+
+	h5 {
+		margin: 0 0 3px;
+		font: bold 13px/18px $font-default;
+	}
+
+	p {
+		margin: 0 0 1em;
+
+		&.sm {
+			font-size: 13px;
+			line-height: 14px;
+		}
+
+		&.nm {
+			margin: 0 0 2px;
+		}
+	}
+
+	a.btn {
+		@include transition(all, 0.2s);
+		display: inline-block;
+		padding: 10px 20px;
+		background: $gray-lt;
+		font-size: 14px;
+		line-height: 17px;
+		font-weight: bold;
+		text-decoration: none;
+		text-transform: uppercase;
+		text-align: center;
+
+		.no-touch &:hover {
+			background: $red;
+			color: #fff;
+		}
+	}
+
+	hr {
+		background: #808080;
+		border: 0;
+		height: 2px;
+		margin: 1.5em 0 1em;
+	}
+
+	ul {
+		margin: 0 0 1em;
+		list-style: none;
+
+		ul {
+			margin: 5px 0;
+		}
+
+		li {
+			position: relative;
+			margin-bottom: 5px;
+			padding-left: 15px;
+
+			&:before {
+				display: block;
+				content: '';
+				position: absolute;
+				top: 8px;
+				left: 0;
+				width: 4px;
+				height: 4px;
+				background: $c-text;
+				border-radius: 50%;
+			}
+
+			a {
+				@include transition(all, 0.2s);
+				
+				.no-touch &:hover {
+					color: $c-text;
+				}
+			}
+		}
+
+		&.gray-links {
+			a {
+				@include transition(all, 0.2s);
+				color: $c-text;
+				text-decoration: underline;
+
+				.no-touch &:hover {
+					color: $red;
+					text-decoration: underline;
+				}
+			}
+		}
+
+		&.lighter {
+			li {
+				color: #787878;
+
+				&:before {
+					background: #787878;
+				}
+			}
+		}
+
+		&.smaller {
+			li {
+				padding-left: 12px;
+				margin-bottom: 5px;
+				font-size: 12px;
+				line-height: 16px;
+
+				&:before {
+					top: 6px;
+				}
+			}
+		}
+	}
+
+	@include bp($M) {
+		padding: 0 20px 20px;
+	}
+
+	@include bp($XS) {
+		padding: 0 10px 10px;
+	}
+}
+
+h2.image-heading {
+	@include boxsize;
+	margin: 0 -40px 15px;
+	padding: 19px 40px;
+	background: url(../designimages/pmn-mk-section-bg.jpg) no-repeat 0 0;
+	background-size: cover;
+	max-height: 78px;
+	font: bold 40px/40px $font-default;
+	color: #fff;
+	text-align: center;
+	text-shadow: -4px 3px 5px rgba(0, 0, 0, 0.75);
+
+	&.no-margin {
+		margin: 0 -40px;
+	}
+
+	@include bp($M) {
+		margin: 0 -20px 15px;
+		padding: 19px 20px;
+		max-height: none;
+		font: bold 30px/30px $font-default;
+
+		&.no-margin { margin: 0 -20px; }
+	}
+
+	@include bp($XS) {
+		margin: 0 -10px 15px;
+		padding: 19px 10px;
+		font: bold 22px/22px $font-default;
+
+		&.no-margin { margin: 0 -10px; }
+	}
+}
+
+.acc {
+	@extend %clearfix;
+
+	.acc-toggle {
+		position: relative;
+		margin: 0;
+		padding: 10px 50px;
+		border-top: 2px #808080 solid;
+		border-bottom: 0;
+		font: normal 18px/24px $font-default;
+		color: $red;
+		text-align: center;
+		cursor: pointer;
+
+		&.light-border {
+			border-top: 1px #e9e9e9 solid;
+
+			&.active {
+				border-bottom: 1px #e9e9e9 solid;
+			}
+
+			span {
+				top: 10px;
+			}
+		}
+
+		&.no-top-border {
+			border-top: 0;
+		}
+
+		div {
+			@include transition(all, 0.2s);
+			@include rotate(0);
+			position: absolute;
+			top: 11px;
+			right: 15px;
+			display: block;
+			width: 25px;
+			height: 25px;
+			background: $red;
+			border-radius: 50%;
+			font-size: 23px;
+			color: #fff;
+			text-align: center;
+			cursor: pointer;
+
+			&:before,
+			&:after {
+				@include transition(all, 0.2s);
+				display: block;
+				content: '';
+				position: absolute;
+				background: #fff;
+				opacity: 1;
+			}
+
+			&:before {
+				top: 50%;
+				left: 5px;
+				right: 5px;
+				margin-top: -1.5px;
+				height: 3px;
+			}
+
+			&:after {
+				top: 5px;
+				bottom: 5px;
+				left: 50%;
+				margin-left: -1.5px;
+				width: 3px;
+			}
+		}
+
+		&.active {
+			margin: 0 0 10px;
+			border-bottom: 2px #808080 solid;
+
+			&.no-margin {
+				margin: 0;
+			}
+
+			div {
+				@include rotate(90);
+
+				&:before {
+					opacity: 0;
+				}
+			}
+		}
+	}
+
+	.acc-content {
+		display: none;
+
+		&.padding {
+			padding: 10px 20px;
+		}
+
+		&.active {
+			display: block;
+		}
+
+		p {
+			font-size: 12px;
+			line-height: 18px;
+			color: #787878;
+		}
+
+		#sections & p {
+			font-size: 10px;
+			line-height: 12px;
+		}
+	}
+
+	.acc-content-expanded {
+		margin: 0 0 15px;
+	}
+
+	&.sm {
+		margin: 0 0 2px;
+		
+		&:last-child { margin: 0; }
+
+		.acc-toggle {
+			padding: 5px 65px 5px 10px;
+			background: #a1a1a1;
+			border: 0;
+			font-size: 14px;
+			font-weight: bold;
+			color: #fff;
+			text-align: left;
+
+			div {
+				top: 4px;
+				right: 35px;
+				border-radius: 0;
+				background: none;
+			}
+		}
+
+		@include bp($S) {
+			.acc-toggle {
+				padding: 5px 40px 5px 10px;
+
+				div {
+					right: 10px;
+				}
+			}
+		}
+	}
+
+	&.no-borders {
+		.acc-toggle {
+			padding: 10px 28px 10px 0;
+			border: 0;
+			text-align: left;
+
+			&.active {
+				margin: 0;
+			}
+
+			div {
+				right: -2px;
+			}
+
+			&.toggle-bottom {
+				br {
+					display: none;
+				}
+
+				div {
+					top: auto;
+					bottom: 10px;
+
+					@include bp($M) {
+						top: 11px;
+						bottom: auto;
+					}
+				}
+			}
+		}
+	}
+
+	p.gray-link {
+		a {
+			color: #808080;
+			text-decoration: none;
+
+			.no-touch &:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}

@@ -1,0 +1,260 @@
+/* ===========================================================
+   AD CALENDAR
+=========================================================== */
+.ad-cal-filters {
+	@extend %clearfix;
+	padding-right: 30px;
+	padding-bottom: 25px;
+
+	.ad-cal-filter {
+		float: left;
+		width: 23.875%;
+
+		&+.ad-cal-filter {
+			margin-left: 1.5%;
+		}
+
+		label {
+			display: block;
+			padding: 0 0 2px;
+			font: bold 12px/14px $font-default;
+		}
+
+		input, select {
+			@include boxsize;
+			@include transition(all, 0.2s);
+			padding: 5px;
+			width: 100%;
+			font-size: 12px;
+			background: #fff;
+			border: 1px #d3d3d3 solid;
+		}
+
+		select {
+			height: 25px !important;
+		}
+	}
+
+	@include bp($XL) {
+		padding-right: 0;
+	}
+
+	@include bp($M) {
+		.ad-cal-filter {
+			width: 49%;
+			margin-bottom: 10px;
+
+			&+.ad-cal-filter {
+				margin-left: 2%;
+			}
+
+			&:nth-child(odd) {
+				margin-left: 0;
+				clear: left;
+			}
+		}
+	}
+
+	@include bp($XS) {
+		.ad-cal-filter {
+			float: none;
+			width: auto;
+			margin-left: 0 !important;
+		}
+	}
+}
+
+table.advertising-calendar {
+	margin: 0 0 20px;
+
+	tr {
+		td {
+			padding: 10px 5px;
+			
+			&:nth-child(1) {
+				width: 11%;
+			}
+
+			&:nth-child(2) {
+				width: 30%;
+			}
+
+			&:nth-child(3) {
+				width: 17%;
+			}
+
+			&:nth-child(4) {
+				width: 14%;
+			}
+
+			&:nth-child(5) {
+				width: 14%;
+			}
+
+			&:nth-child(6) {
+				width: 14%;
+			}
+		}
+	}
+
+	thead {
+		tr {
+			td {
+				span {
+					text-transform: uppercase;
+				}
+			}
+		}
+	}
+
+	tbody {
+		&.hidden { display: none; border-top: 2px #fff solid; }
+		&.hidden.active { display: table-row-group; }
+
+		tr {
+			td {
+				text-transform: none;
+
+				&:nth-child(2),
+				&:nth-child(3) {
+					text-align: left;
+				}
+			}
+		}
+	}
+
+	tr.row-toggle {
+		td {
+			@include transition(all, 0.2s);
+			padding: 15px;
+			background: #a1a1a1;
+			border-top: 6px #fff solid;
+			border-bottom: 6px #fff solid;
+			font: bold 14px/14px $font-default;
+			color: #fff;
+			text-transform: uppercase;
+			text-align: center;
+			cursor: pointer;
+
+			&:after {
+				content: '';
+				display: inline-block;
+				margin-left: 10px;
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 10px 7.5px 0 7.5px;
+				border-color: #ffffff transparent transparent transparent;
+			}
+
+			.no-touch &:hover {
+				background: #808080;
+			}
+		}
+
+		&.view-more-rows {
+			&.active {
+				display: none;
+			}
+		}
+
+		&.view-less-rows {
+			td {
+				&:after {
+					@include rotate(180);
+				}
+			}
+		}
+
+		&.row-toggle td:before {
+			display: none !important;
+		}
+	}
+
+	@include bp($M) {
+		text-align: left;
+
+		thead {
+			tr {
+				position: absolute;
+				top: -9999px;
+				left: -9999px;
+			}
+		}
+
+		tbody, tr {
+			display: block;
+		}
+
+		tbody.hidden.active {
+			display: block;
+		}
+
+		tr {
+			td {
+				@include boxsize;
+				display: block;
+				position: relative;
+				width: 100% !important;
+				padding-left: 50%;
+
+				&+td {
+					border-left: 0;
+				}
+
+				&:before {
+					position: absolute;
+					top: 10px;
+					left: 10px;
+					width: 45%;
+					padding-right: 10px;
+					font-weight: bold;
+					white-space: nowrap;
+				}
+
+				&:nth-of-type(1):before {
+					content: 'Pub Date';
+				}
+
+				&:nth-of-type(2):before {
+					content: 'Name';
+				}
+
+				&:nth-of-type(3):before {
+					content: 'Property';
+				}
+
+				&:nth-of-type(4):before {
+					content: 'Type';
+				}
+
+				&:nth-of-type(5):before {
+					content: 'Reservation Deadline';
+				}
+
+				&:nth-of-type(6):before {
+					content: 'Materials Deadline';
+				}
+			}
+		}
+	}
+}
+
+.image-cols.ad-cal-bottom {
+	@include bp(750px) {
+		.image-col {
+			float: none;
+			display: inline-block;
+			vertical-align: middle;
+			margin-right: 10px;
+
+			&+.image-col {
+				margin-left: 10px;
+			}
+
+			img {
+				@include noalign;
+			}
+		}
+	}
+}

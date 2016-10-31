@@ -1,0 +1,277 @@
+/* ===========================================================
+   HOME
+=========================================================== */
+.banner {
+	background-image: url(../designimages/pmn-mk-banner.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: top center;
+	height: $banner-height;
+	text-align: center;
+
+	h2 {
+		margin: 0;
+		padding: 15px 0 0;
+		font: 31px/50px $font-default;
+		text-transform: uppercase;
+		color: $red;
+	}
+
+	p {
+		margin: 0 auto;
+		max-width: 320px;
+		font-size: 14px;
+		line-height: 16px;
+		
+		a {
+			@include transition(color, 0.25s);
+			font-weight: bold;
+			color: $red;
+
+			.no-touch &:hover {
+				color: $c-text;
+			}
+		}
+	}
+
+	.contact-btns {
+		display: none;
+	}
+
+	@include bp($S) {
+		padding: 15px 0;
+		background-image: none;
+		background-color: $background;
+		height: auto;
+
+		h2 {
+			padding: 0;
+			font: 20px/30px $font-default;
+		}
+
+		p {
+			display: none;
+		}
+
+		.contact-btns {
+			display: block;
+			margin: 7px 0 0;
+
+			a {
+				@include hide-text;
+				@include transition(all, 0.25s);
+				display: inline-block;
+				width: 75px;
+				height: 45px;
+				background-color: $red;
+				background-repeat: no-repeat;
+				background-position: center center;
+				border-radius: 5px;
+				color: #fff;
+				text-decoration: none;
+
+				&+a {
+					margin-left: 15px;
+				}
+
+				&.phone {
+					background-image: url(../designimages/pmn-mk-icon-phone.png);
+					background-size: auto 30px;
+				}
+
+				&.email {
+					background-image: url(../designimages/pmn-mk-icon-email.png);
+					background-size: 30px auto;
+				}
+
+				.no-touch &:hover {
+					background-color: darken($red, 5%);
+				}
+			}
+		}
+	}
+}
+
+.ctas {
+	padding: 10px 0 0;
+	text-align: center;
+
+	h3 {
+		margin: 0 0 10px;
+		font: normal 20px/26px $font-default;
+		color: $gray-dk;
+	}
+
+	.cta-wrap {
+		@extend %clearfix;
+		padding: 0 0 20px;
+		background-image: url(../designimages/pmn-mk-bg-bridge.jpg);
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: top center;
+
+		.cta {
+			perspective: 1000px;
+			display: inline-block;
+			margin: 25px 10px 0;
+
+			.no-touch &:hover .cta-flip {
+				transform: rotateY(180deg);
+			}
+			
+			.cta-flip {
+				position: relative;
+				width: 200px;
+				height: 200px;
+			}
+
+			a.full-link {
+				display: block;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				z-index: 299;
+				border-radius: 50%;
+			}
+
+			.circle {
+				display: block;
+				width: 188px;
+				height: 188px;
+				border-radius: 50%;
+				backface-visibility: hidden;
+				position: absolute;
+				top: 6px;
+				left: 6px;
+
+				&:before {
+					@include pseudo;
+					position: absolute;
+					top: -6px;
+					left: -6px;
+					right: -6px;
+					bottom: -6px;
+					border-width: 2px;
+					border-style: solid;
+					border-radius: 50%;
+				}
+
+				&.front {
+					background: rgba(255, 255, 255, 0.66);
+					z-index: 2;
+					transform: rotateY(0deg);
+
+					.touch & {
+						z-index: 0;
+						transform: rotateY(180deg);
+					}
+
+					&:before {
+						border-color: rgba(255, 255, 255, 0.66);
+					}
+
+					.circle-content {
+						img {
+							max-width: 90%;
+						}
+
+						h4 {
+							font: bold 24px/26px $font-default;
+							color: #000;
+						}
+					}
+				}
+
+				&.back {
+					background: $red;
+					transform: rotateY(180deg);
+
+					.touch & {
+						z-index: 2;
+						transform: rotateY(0deg);
+					}
+
+					&:before {
+						border-color: $red;
+					}
+
+					.circle-content {
+						img {
+							display: block;
+							margin: 5px auto 8px;
+							max-width: 65%;
+						}
+
+						h4 {
+							margin: 0 0 10px;
+							font: bold 24px/26px $font-default;
+							color: #fff;
+						}
+
+						p {
+							margin: 0 5% 15px;
+							font-size: 10px;
+							line-height: 11px;
+							color: #fff;
+
+							a {
+								color: #fff;
+								text-transform: uppercase;
+								text-decoration: none;
+							}
+						}
+					}
+				}
+
+				.circle-content {
+					@include valign;
+				}
+			}
+
+			.cta-flip {
+				transition: 0.6s;
+				transform-style: preserve-3d;
+				position: relative;
+			}
+		}
+	}
+
+	@include bp($S) {
+		padding: 0;
+
+		h3 {
+			display: none;
+		}
+
+		.cta-wrap {
+			background-image: url(../designimages/pmn-mk-bg-bridge-m.jpg);
+		}
+	}
+
+	@include bp(459px) {
+		.cta-wrap {
+			.cta {
+				.cta-flip {
+					width: 230px;
+					height: 230px;
+				}
+
+				.circle {
+					width: 230px;
+					height: 230px;
+
+					&.back {
+						.circle-content {
+							p {
+								font-size: 14px;
+								line-height: 16px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,538 @@
+/* ===========================================================
+   PROPERTIES
+=========================================================== */
+.property-section {
+	&#sections {
+		.property-section-content {
+			padding: 0 50px;
+
+			@include bp($M) { padding: 0; }
+		}
+	}
+
+	&#advertising-opportunities {
+		.property-section-content {
+			padding: 0 70px;
+
+			@include bp($M) { padding: 0; }
+
+			p {
+				font-size: 13px;
+				line-height: 14px;
+			}
+		}
+	}
+
+	&.phillycom {
+		&#sections {
+			.property-section-content {
+				padding: 0 70px;
+
+				@include bp($M) { padding: 0; }
+			}
+		}
+
+		&#ad-placements {
+			.property-section-content {
+				padding: 0 70px;
+				font-size: 14px;
+				line-height: 16px;
+
+				@include bp($M) { padding: 0; }
+			}
+		}
+	}
+}
+
+.info-tabs {
+	text-align: center;
+
+	&.readership {
+		margin: 0 -40px;
+
+		@include bp($M) {
+			margin: 0 -20px;
+		}
+
+		@include bp($XS) {
+			margin: 0 -10px;
+		}
+	}
+
+	ul {
+		display: inline-block;
+		margin: 0 0 15px;
+
+		li {
+			display: inline-block;
+			padding: 0;
+			font: bold 12px/12px $font-default;
+
+			&:before { display: none; }
+
+			&+li {
+				margin-left: 10px;
+			}
+
+			a {
+				@include boxsize;
+				@include transition(all, 0.2s);
+				display: block;
+				padding: 7px 5px 5px;
+				width: 100px;
+				border: 1px #e9e9e9 solid;
+				color: #5e5e5e;
+				text-decoration: none;
+			}
+
+			.no-touch & a:hover,
+			&.active > a {
+				color: $red;
+			}
+		}
+	}
+
+	h4 {
+		margin: 0 0 5px;
+		padding: 10px;
+		background: #f8f8f8;
+		font-size: 16px;
+		line-height: 19px;
+		font-weight: bold;
+		font-family: $font-gotham;
+
+		span {
+			font-weight: 900;
+			color: $red;
+		}
+	}
+
+	.info-tab-content {
+		display: none;
+
+		&.active {
+			display: block;
+		}
+	}
+
+	.info-tab-footer {
+		margin: 8px 0 0;
+
+		p {
+			margin: 0 0 10px;
+			font-size: 12px;
+			line-height: 16px;
+
+			a {
+				@include transition(all, 0.2s);
+				font-weight: bold;
+
+				.no-touch &:hover {
+					color: $c-text;
+				}
+			}
+
+			&.footnote {
+				font-size: 9px;
+				line-height: 10px;
+				color: #c9c9c9;
+			}
+		}
+	}
+
+	.icon-blocks {
+		@extend %clearfix;
+
+		.icon-block {
+			@include boxsize;
+			float: left;
+			width: 100%;
+			padding: 20px;
+			background: #f8f8f8;
+			border-bottom: 5px #fff solid;
+
+			.icon-wrap {
+				display: inline-block;
+
+				label {
+					@extend %clearfix;
+					display: inline-block;
+					margin: 10px 0 0;
+					font-size: 12px;
+					line-height: 12px;
+					font-weight: bold;
+					font-family: $font-gotham;
+					color: #908a8a;
+					text-align: right;
+
+					em {
+						float: left;
+						font-style: normal;
+					}
+
+					strong {
+						float: right;
+						display: block;
+						padding-left: 5px;
+						font-size: 30px;
+						line-height: 24px;
+						font-weight: 900;
+						color: $red;
+					}
+				}
+
+				img {
+					display: block;
+					margin: 0 auto;
+				}
+
+				&.gender {
+					label {
+						position: absolute;
+						top: 50%;
+						margin-top: -15px;
+
+						&.left {
+							left: -70px;
+						}
+
+						&.right {
+							right: -65px;
+						}
+					}
+
+					img { max-width: 95px; }
+				}
+
+				&.age {
+					img { max-width: 110px; }
+				}
+
+				&.hhi {
+					img { max-width: 56px; }
+				}
+
+				&.home {
+					img { max-width: 65px; }
+				}
+
+				&.ed {
+					img { max-width: 82px; }
+				}
+			}
+		}
+
+		&.thirds .icon-block {
+			width: 33.33%;
+			border-left: 5px #fff solid;
+
+			&:nth-child(1),
+			&:nth-child(3n+1) {
+				clear: left;
+				border-left: 0;
+			}
+
+			.js-ready & > img { @include valign; }
+
+			.js-ready & .icon-wrap {
+				@include valign;
+			}
+		}
+
+		&.thirds.uneven .icon-block {
+			width: 36%;
+
+			&:nth-child(2) {
+				width: 28%;
+			}
+		}
+
+		&.halves .icon-block {
+			width: 50%;
+			border-left: 5px #fff solid;
+
+			&:nth-child(odd) {
+				clear: left;
+				border-left: 0;
+			}
+
+			.js-ready & > img { @include valign; }
+
+			.js-ready & .icon-wrap {
+				@include valign;
+			}
+		}
+
+		@include bp(650px) {
+			&.thirds .icon-block,
+			&.thirds.uneven .icon-block,
+			&.halves .icon-block {
+				width: 100% !important;
+				border-left: 0;
+
+				.js-ready & > img, .js-ready & .icon-wrap { @include noalign; }
+			}
+		}
+	}
+}
+
+.acc-wrap {
+	margin: 0 0 10px;
+}
+
+.image-list {
+	.image-list-item {
+		@extend %clearfix;
+		padding: 15px 0 10px;
+
+		&+.image-list-item {
+			border-top: 2px #808080 solid;
+		}
+		
+		.text-wrap {
+			@include boxsize;
+			float: left;
+			width: 50%;
+			padding-right: 30px;
+
+			h4 {
+				margin: 0 0 5px;
+				font: normal 18px/24px $font-default;
+				color: $red;
+			}
+
+			p {
+				font-size: 12px !important;
+				line-height: 16px;
+				color: $c-text !important;
+			}
+		}
+
+		.image-wrap {
+			float: right;
+			width: 50%;
+			text-align: center;
+
+			label {
+				display: block;
+				font-size: 14px;
+				text-transform: uppercase;
+				text-align: left;
+
+				&.sm {
+					font-size: 11px;
+					line-height: 16px;
+				}
+			}
+
+			img.max-90 {
+				max-width: 90%;
+			}
+
+			img.max-70 {
+				max-width: 70%;
+			}
+
+			img.max-50 {
+				max-width: 50%;
+			}
+
+			img.with-border {
+				border: 1px #b1b1b1 solid;
+			}
+
+			.two-col-images {
+				@extend %clearfix;
+
+				> a.modal-link,
+				> img {
+					@include boxsize;
+					display: block;
+					float: left;
+					width: 49%;
+					margin-left: 2%;
+					margin-bottom: 5px;
+
+					&:nth-of-type(odd) {
+						margin-left: 0;
+						clear: left;
+					}
+
+					&.full {
+						float: none;
+						clear: left;
+						width: auto;
+						margin-left: 0;
+					}
+				}
+
+				.img-with-label {
+					@include boxsize;
+					float: left;
+					width: 49%;
+					margin-left: 2%;
+					margin-bottom: 5px;
+					text-align: left;
+
+					&:nth-child(odd) {
+						margin-left: 0;
+						clear: left;
+					}
+
+					&.full {
+						float: none;
+						clear: left;
+						width: auto;
+						margin-left: 0;
+					}
+				}
+
+				@include bp($XS) {
+					&.one-col-mobile {
+						> img,
+						.img-with-label {
+							float: none;
+							width: auto;
+							margin-left: 0;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@include bp($XS) {
+		.image-list-item {
+
+			&+.image-list-item {
+				border-top: 1px #e9e9e9 solid;
+			}
+			
+			.text-wrap {
+				float: none;
+				width: auto;
+				padding-right: 0;
+			}
+
+			.image-wrap {
+				float: none;
+				width: auto;
+			}
+		}
+	}
+}
+
+.cols {
+	@extend %clearfix;
+	padding: 0 15px;
+
+	&.two-col .col {
+		float: left;
+		width: 46%;
+		margin-left: 8%;
+
+		&:nth-child(odd) {
+			clear: left;
+			margin-left: 0;
+		}
+
+		@include bp($XS) {
+			float: none;
+			width: auto;
+			margin: 0 auto !important;
+		}
+	}
+
+	.col {
+		img {
+			display: block;
+			border: 1px #141414 solid;
+		}
+	}
+}
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 899;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.75);
+	text-align: center;
+	cursor: pointer;
+	overflow-y: scroll;
+
+	&.active {
+		display: block;
+	}
+
+	.modal-close {
+		@include transition(all, 0.2s);
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		width: 30px;
+		height: 30px;
+		cursor: pointer;
+
+		&:before,
+		&:after {
+			@include transition(all, 0.2s);
+			@include pseudo;
+			position: absolute;
+			top: 15px;
+			left: 0;
+			width: 100%;
+			height: 3px;
+			border-radius: 3px;
+			background: #fff;
+		}
+
+		&:before {
+			@include rotate(45);
+		}
+
+		&:after {
+			@include rotate(-45);
+		}
+
+		.no-touch &:hover {
+			&:before,
+			&:after {
+				background: lighten($red, 20%);
+			}
+		}
+	}
+
+	.modal-content {
+		@include noalign;
+		@include boxsize;
+		width: 550px;
+		max-width: 100%;
+		margin: 30px auto;
+		cursor: default;
+		
+		@include bp($XL) { padding: 0 5%; }
+	}
+
+	&.valign .modal-content {
+		@include valign;
+		margin: 0 auto;
+	}
+
+	h3 {
+		margin: 0 0 15px;
+		font: bold 25px/30px $font-default;
+		color: #fff;
+		text-shadow: -4px 3px 5px rgba(0, 0, 0, 0.75);
+	}
+
+	@include bp($XS) {
+		h3 {
+			font: bold 20px/25px $font-default;
+		}
+	}
+}

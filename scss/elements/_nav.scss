@@ -1,0 +1,412 @@
+/* ===========================================================
+   NAV
+=========================================================== */
+nav {
+	&.main-navigation {
+		margin: 5px 0;
+
+		a.menu-toggle {
+			display: none;
+		}
+
+		ul {
+			@extend %clearfix;
+			margin: 0;
+			padding: 0;
+			list-style: none;
+
+			li {
+				@include boxsize;
+				float: left;
+				width: 25%;
+
+				a {
+					@include transition(all, 0.2s);
+					display: block;
+					padding: 10px 0;
+					background: $gray-lt;
+					font: bold 10px/13px $font-default;
+					text-transform: uppercase;
+					text-align: center;
+					color: $red;
+					text-decoration: none;
+				}
+
+				&:nth-of-type(1) > a {
+					margin-right: 3.75px;
+				}
+
+				&:nth-of-type(2) > a {
+					margin-left: 1.25px;
+					margin-right: 2.5px;
+				}
+
+				&:nth-of-type(3) > a {
+					margin-left: 2.5px;
+					margin-right: 1.25px;
+				}
+
+				&:nth-of-type(4) > a {
+					margin-left: 3.75px;
+				}
+
+				.no-touch & a:hover,
+				&.current > a {
+					background: $red;
+					color: #fff;
+				}
+
+				a:hover {
+					text-decoration: none !important;
+				}
+			}
+
+			&.three-items {
+				li {
+					width: 33.33%;
+
+					&:nth-of-type(1) > a {
+						margin-right: 3.3px;
+					}
+
+					&:nth-of-type(2) > a {
+						margin-left: 1.7px;
+						margin-right: 1.7px;
+					}
+
+					&:nth-of-type(3) > a {
+						margin-left: 3.3px;
+						margin-right: 0;
+					}
+				}
+			}
+		}
+
+		@include bp($L) {
+			position: absolute;
+			top: 20px;
+			right: 15px;
+			margin: 0;
+
+			a.menu-toggle {
+				@include transition(all, 0.25s, ease-in-out);
+				display: block;
+				padding: 15px;
+
+				span.icon {
+					@include transition(all, 0.25s, ease-in-out);
+					display: inline-block;
+					position: relative;
+					width: 35px;
+					height: 22px;
+					transform: rotate(0);
+					cursor: pointer;
+
+					span {
+						@include transition(all, 0.25s, ease-in-out);
+						position: absolute;
+						left: 0;
+						width: 50%;
+						height: 4px;
+						background: #161b22;
+						border-radius: 3px;
+						opacity: 1;
+						transform: rotate(0);
+
+						&:nth-child(even) {
+							left: 50%;
+							border-radius: 0 3px 3px 0;
+						}
+
+						&:nth-child(odd) {
+							left: 0px;
+							border-radius: 3px 0 0 3px;
+						}
+
+						&:nth-child(1), &:nth-child(2) {
+							top: 0;
+						}
+
+						&:nth-child(3), &:nth-child(4) {
+							top: 9px;
+						}
+
+						&:nth-child(5), &:nth-child(6) {
+							top: 18px;
+						}
+					}
+				}
+
+				span.label {
+					display: none;
+				}
+
+				.no-touch &:hover {
+					background: $gray-lt;
+				}
+
+				&.active {
+					background: $gray-lt;
+
+					span.icon {
+						span {
+							&:nth-child(1),
+							&:nth-child(6) {
+								transform: rotate(45deg);
+							}
+
+							&:nth-child(2),
+							&:nth-child(5) {
+								transform: rotate(-45deg);
+							}
+
+							&:nth-child(1) {
+								left: 5px;
+								top: 7px;
+							}
+
+							&:nth-child(2) {
+								left: calc(50% - 5px);
+								top: 7px;
+							}
+
+							&:nth-child(3) {
+								left: -50%;
+								opacity: 0;
+							}
+
+							&:nth-child(4) {
+								left: 100%;
+								opacity: 0;
+							}
+
+							&:nth-child(5) {
+								left: 5px;
+								top: 14px;
+							}
+
+							&:nth-child(6) {
+								left: calc(50% - 5px);
+								top: 14px;
+							}
+						}
+					}
+				}
+			}
+
+			ul {
+				display: none;
+				position: absolute;
+				top: 52px;
+				right: 0;
+				z-index: 599;
+				width: 200px;
+				background: $gray-lt;
+
+				&.active {
+					display: block;
+				}
+
+				li {
+					float: none;
+					width: auto;
+
+					a {
+						padding: 15px;
+						font: bold 24px/24px $font-default;
+						color: #161b22;
+						text-align: left;
+						margin: 0 !important;
+
+						span {
+							display: none;
+						}
+					}
+				}
+
+				&.three-items {
+					li {
+						width: auto;
+
+						a { margin: 0 !important; }
+					}
+				}
+			}
+		}
+
+		@include bp($S) {
+			top: 0;
+			right: 0;
+			bottom: 0;
+
+			a.menu-toggle {
+				padding: 19px 15px 17px;
+			}
+
+			ul {
+				top: 58px;
+			}
+		}
+	}
+
+	&.sub-navigation {
+		margin: 0 0 5px;
+		padding: 10px 0 5px;
+		border-top: 2px #d5d5d5 solid;
+		border-bottom: 2px #d5d5d5 solid;
+		text-align: center;
+
+		ul {
+			@extend %clearfix;
+			display: inline-block;
+			margin: 0;
+			padding: 0;
+			list-style: none;
+
+			li {
+				display: block;
+				float: left;
+				font: bold 16px/16px $font-default;
+
+				&+li {
+					margin-left: 30px;
+					padding-left: 30px;
+					border-left: 1px #d5d5d5 solid;
+				}
+
+				a {
+					@include transition(all, 0.2s);
+					color: #787878;
+					text-decoration: none;
+				}
+
+				.no-touch &:hover > a,
+				&.current > a {
+					color: $red;
+				}
+			}
+		}
+
+		@include bp($S) {
+			ul {
+				li {
+					&+li {
+						margin-left: 15px;
+						padding-left: 15px;
+					}
+				}
+			}
+		}
+
+		@include bp($XS) {
+			ul {
+				li {
+					font: bold 14px/14px $font-default;
+				}
+			}
+		}
+
+		@include bp($XXS) {
+			ul {
+				li {
+					font: bold 13px/13px $font-default;
+
+					&+li {
+						margin-left: 10px;
+						padding-left: 10px;
+					}
+				}
+			}
+		}
+	}
+
+	&.page-navigation {
+		margin: 0 0 2px;
+		padding: 0;
+		border-bottom: 1px #d5d5d5 solid;
+		text-align: center;
+
+		ul {
+			@extend %clearfix;
+			display: inline-block;
+
+			li {
+				display: block;
+				float: left;
+				padding: 0 0 5px;
+				font: bold 16px/16px $font-default;
+
+				&+li {
+					margin-left: 30px;
+					padding-left: 30px;
+					border-left: 1px #d5d5d5 solid;
+				}
+
+				a {
+					@include transition(all, 0.2s);
+					color: #787878;
+					text-decoration: none;
+				}
+
+				.no-touch &:hover > a,
+				&.current > a {
+					color: $red;
+				}
+			}
+		}
+
+		@include bp($S) {
+			ul {
+				li {
+					&+li {
+						margin-left: 10px;
+						padding-left: 10px;
+					}
+				}
+			}
+		}
+
+		@include bp($XS) {
+			ul {
+				li {
+					font: bold 14px/14px $font-default;
+				}
+			}
+		}
+
+		@include bp($XXS) {
+			ul {
+				li {
+					font: bold 12px/12px $font-default;
+				}
+			}
+		}
+
+		ul.four-items {
+			@include bp($L) {
+				li {
+					&+li {
+						margin-left: 10px;
+						padding-left: 10px;
+					}
+				}
+			}
+
+			@include bp($M) {
+				li {
+					font: bold 14px/14px $font-default;
+				}
+			}
+
+			@include bp($S) {
+				li {
+					font: bold 12px/12px $font-default;
+				}
+			}
+
+			@include bp(450px) {
+				li.no-mobile { display: none; }
+			}
+		}
+	}
+}

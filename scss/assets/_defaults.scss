@@ -1,0 +1,95 @@
+/* ===========================================================
+   DEFAULTS
+=========================================================== */
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    min-width: 320px;
+    font-size: $font-size;
+    line-height: $line-height;
+    font-family: $font-default;
+    color: $c-text;
+    background-color: $background;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    -o-font-smoothing: antialiased;
+    overflow-x: hidden;
+
+    &.fixed {
+        overflow-y: hidden;
+    }
+}
+
+a {
+    color: $c-link;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.clear {
+    clear: both;
+    height: 0;
+    overflow: hidden;
+}
+
+.textleft {
+    text-align: left;
+}
+
+.textcenter {
+    text-align: center;
+}
+
+.textright {
+    text-align: right;
+}
+
+.alignleft {
+    float: left;
+}
+
+.aligncenter {
+    display: block;
+    margin: 0 auto;
+}
+
+.alignright {
+    float: right;
+}
+
+.uppercase {
+    text-transform: uppercase !important;
+}
+
+.lowercase {
+    text-transform: lowercase !important;
+}
+
+.normalcase {
+    text-transform: none !important;
+}
+
+.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+
+    iframe, object, embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
