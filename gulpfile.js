@@ -17,7 +17,7 @@ gulp.task('sass', function() {
 
 // javascript
 gulp.task('javascript', function(){
-	return gulp.src(['js/functions/*.js'])
+	return gulp.src(['js/includes/cookie.js', 'js/functions/*.js'])
 		.pipe(concat('scripts.js'))
 		.pipe(sourcemaps.init({loadMaps: true }))
 		.pipe(rename('scripts.min.js'))

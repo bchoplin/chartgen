@@ -5,9 +5,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>PMN Chart Generator</title>
+	<title>Chart Generator</title>
 
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/global.css">
 	
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
@@ -19,61 +20,130 @@
 <body>
 	
 <div class="page-wrap">
-	<div class="col lCol">
+	<div class="col main">
+		<header class="title" role="banner">
+			<h1>Chart Generator</h1>
+		</header><!--/title-->
+
+		<main class="content-wrapper" role="region">
+			<div id="generatedChart-wrap"><canvas id="generatedChart" width="500" height="500"></canvas></div>
+			<div class="generated-code" id="embed-code" contenteditable="true"><textarea></textarea></div>
+		</main><!--/content-wrapper-->
+	</div><!--/main-->
+	<div class="col side">
 		<header class="side-title" role="banner">
-			<h3><span>Settings</span> <a href="#" id="clear-fields">clear fields</a></h3>
+			<h3><span>Settings</span></h3>
 			<form>
-				<div class="field-wrapper" id="type-field-wrap">
-					<label for="chart-type">Type <span>*</span></label>
+				<div class="field-wrapper">
+					<label for="chart-type">Type</label>
 					<select id="chart-type">
 						<option value="pie">Pie Chart</option>
 						<option value="doughnut">Doughnut Chart</option>
 						<option value="polarArea">Polar Area Chart</option>
 						<option value="bar">Bar Chart</option>
 						<option value="line">Line Chart</option>
-						<option value="radar">Radar Chart</option>
-						<option value="bubble">Bubble Chart</option>
 					</select>
 				</div>
-				<div class="field-wrapper" id="title-field-wrap">
-					<label for="chart-title">Title <span>*</span></label>
-					<input type="text" id="chart-title" placeholder="examplechart1"/>
+				<div class="field-wrapper bar horizontalBar">
+					<label for="bar-type">Bar Orientation</label>
+					<select id="bar-type">
+						<option value="bar">Vertical</option>
+						<option value="horizontalBar">Horizontal</option>
+					</select>
 				</div>
-				<div class="field-wrapper" id="data-field-wrap">
+				<div class="field-wrapper">
+					<label for="chart-width">Width</label>
+					<input type="text" id="chart-width" value="500px"/>
+					<p class="description">Choose the width of the chart with any CSS valid value (%, px, em).</p>
+				</div>
+				<div class="field-wrapper">
+					<label for="chart-responsive">
+					Responsive</label>
+					<select id="chart-responsive">
+						<option value="true">True</option>
+						<option value="false">False</option>
+					</select>
+				</div>
+				<div class="field-wrapper bar line">
+					<label for="chart-dataset-name">Dataset Label</label>
+					<input type="text" id="chart-dataset-name" value="Dataset"/>
+				</div>
+				<div class="field-wrapper">
 					<label for="chart-data">Data</label>
-					<input type="text" id="chart-data" placeholder="20, 30, 50"/>
+					<input type="text" id="chart-data" value="15,35,50"/>
 				</div>
-				<div class="field-wrapper" id="labels-field-wrap">
+				<div class="field-wrapper">
 					<label for="chart-labels">Labels</label>
-					<input type="text" id="chart-labels" placeholder="Red, Blue, Yellow"/>
+					<input type="text" id="chart-labels" value="Label 1,Label 2,Label 3"/>
 				</div>
-				<div class="field-wrapper" id="colors-field-wrap">
-					<label for="chart-color">Colors</label>
+				<div class="field-wrapper" id="fill-colors">
+					<label for="chart-color">Fill Color<span>s</span></label>
 					<div class="colors-wrap"></div>
-					<p class="description nm">The number of colors available reflects the amount of data you have entered.</p>
 				</div>
-				<div class="field-wrapper" id="colors-field-wrap">
-					<label for="chart-color">Border Colors</label>
+				<div class="field-wrapper line">
+					<label for="remove-fill">Remove Fill</label>
+					<label class="check-label"><input type="checkbox" id="remove-fill"/> Remove the fill for line charts.</label>
+				</div>
+				<div class="field-wrapper">
+					<label for="border-color">Border Color<span>s</span></label>
 					<div class="border-colors-wrap"></div>
-					<p class="description nm">The number of colors available reflects the amount of data you have entered.</p>
 				</div>
-				<div class="field-wrapper" id="opacity-field-wrap">
-					<label for="chart-opacity">Opacity</label>
+				<div class="field-wrapper line radar">
+					<label for="point-bg">Point Colors</label>
+					<div class="input-wrap"><input type="color" id="point-bg" value="#ffffff"/><span>BG</span></div> <div class="input-wrap"><input type="color" id="point-border" value="#27a6b9"/><span>Border</span></div>
+				</div>
+				<div class="field-wrapper line radar">
+					<label for="point-border">Point Hover Colors</label>
+					<div class="input-wrap"><input type="color" id="point-bg-h" value="#ffffff"/><span>BG</span></div> <div class="input-wrap"><input type="color" id="point-border-h" value="#484848"/><span>Border</span></div>
+				</div>
+				<div class="field-wrapper">
+					<label for="chart-border-width">Border Width (px)</label>
+					<input type="number" id="border-width" min="0" max="10" value="1"/>
+					<p class="description">Choose a pixel value between 0 and 10.</p>
+				</div>
+				<div class="field-wrapper">
+					<label for="chart-opacity">Opacity (%)</label>
 					<input type="number" id="chart-opacity" min="1" max="100" value="100"/>
 					<p class="description">Choose a percentage value between 1 and 100.</p>
 				</div>
+				<div class="field-wrapper pie doughnut polararea">
+					<label for="chart-rotation">Rotation</label>
+					<input type="number" id="chart-rotation" min="-360" max="360" value="0"/>
+					<p class="description">Choose a degree value between 0 and 360.</p>
+				</div>
+				<div class="field-wrapper pie doughnut">
+					<label for="chart-cutout">Cutout (%)</label>
+					<input type="number" id="chart-cutout" min="0" max="100" value="0"/>
+					<p class="description">Choose a percentage value between 0 and 100.</p>
+				</div>
+				<div class="field-wrapper horizontalBar">
+					<label for="xaxes-min">X Axes Minimum</label>
+					<input type="number" id="xaxes-min" min="0" value="0"/>
+				</div>
+				<div class="field-wrapper horizontalBar">
+					<label for="xaxes-max">X Axes Maximum</label>
+					<input type="number" id="xaxes-max" value="100"/>
+					<p class="description">The minimum value for this is the highest data amount.</p>
+				</div>
+				<div class="field-wrapper bar line">
+					<label for="yaxes-min">Y Axes Minimum</label>
+					<input type="number" id="yaxes-min" min="0" value="0"/>
+				</div>
+				<div class="field-wrapper bar line">
+					<label for="yaxes-max">Y Axes Maximum</label>
+					<input type="number" id="yaxes-max" value="100"/>
+				</div>
+				<div class="field-wrapper horizontalBar">
+					<label for="xaxes-step">X Axes Step Size</label>
+					<input type="number" id="xaxes-step" min="1" value="10"/>
+				</div>
+				<div class="field-wrapper bar line">
+					<label for="yaxes-step">Y Axes Step Size</label>
+					<input type="number" id="yaxes-step" min="1" value="10"/>
+				</div>
 			</form>
 		</header><!--/side-title-->
-	</div><!--/lCol-->
-	<div class="col rCol">
-		<header class="title" role="banner">
-			<h1>Chart Generator</h1>
-		</header><!--/title-->
-
-		<main class="content-wrapper" role="region">
-			<div id="generatedChart-wrap" style="max-width: 500px;"><canvas id="generatedChart" width="500" height="500"></canvas></div>
-		</main><!--/content-wrapper-->
-	</div><!--/rCol-->
+	</div><!--/side-->
 </div><!--/page-wrap-->
 
 </body>
