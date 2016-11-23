@@ -1,5 +1,22 @@
 jQuery(document).ready(function($) {
 
+	//adjust page-wrap padding on sidebar resize
+	var side_width = $('.side').width();
+
+	function adjustPageWrap() {
+		var new_side_width = $('.side').width();
+		if(side_width != new_side_width && $(window).width() > 800) {
+			$('.page-wrap').css('padding-left', new_side_width + 'px');
+			side_width = new_side_width;
+		}
+		if($(window).width() <= 800) {
+			$('.page-wrap').css('padding-left', '0');
+		}
+	}
+
+	jQuery(window).resize(adjustPageWrap);
+	var timer = setInterval(adjustPageWrap, 100);
+
 	//add active class to label when checkbox is checked
 	$('input[type=checkbox]').on('change', function() {
 		if($(this).is(':checked')) {
@@ -37,7 +54,12 @@ jQuery(document).ready(function($) {
 		chart_y_max = Math.abs($('#yaxes-max').val()),
 		chart_x_step = Math.abs($('#xaxes-step').val()),
 		chart_y_step = Math.abs($('#yaxes-step').val()),
-		no_bg = false;
+		point_radius = Math.abs($('#point-radius').val()),
+		point_radius_h = Math.abs($('#point-radius-h').val()),
+		point_border_width = Math.abs($('#point-border-width').val()),
+		point_border_width_h = Math.abs($('#point-border-width-h').val()),
+		no_bg = false,
+		data_count = 1;
 
 	// CHART TYPE
 
@@ -50,6 +72,7 @@ jQuery(document).ready(function($) {
 			chart_type = bar_type;
 		}
 
+		//if the bg was removed on a line chart, fill the bg again on other chart types
 		if(chart_type !== 'line' && no_bg == true) {
 			no_bg = false;
 		}
@@ -110,6 +133,31 @@ jQuery(document).ready(function($) {
 		vars['myChart_' + chartCount].update();
 		createCode();
 	});
+
+	$('#add-data').on('click', function(e) {
+		e.preventDefault();
+		data_count++;
+		var parent = $(this).parent('label');
+		$('<input type="text" id="chart-data-'+data_count+'"/>').insertBefore(parent);
+		countInputs();
+	});
+
+	$('#remove-data').on('click', function(e) {
+		e.preventDefault();
+		var parent = $(this).parent('label');
+		parent.prev('input').remove();
+		data_count--;
+		countInputs();
+	});
+
+	function countInputs() {
+		var num_inputs = $('#data-toggle').find('input').length;
+		if(num_inputs == 0) {
+			$('#remove-data').hide();
+		} else {
+			$('#remove-data').show();
+		}
+	} countInputs();
 
 	// CHART LABELS
 
@@ -181,7 +229,7 @@ jQuery(document).ready(function($) {
 	
 	function shadeColor(color, percent) {   
 		var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
-		return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
+		return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1).toUpperCase();
 	}
 
 	// FILL COLORS (SET DEFAULTS)
@@ -372,7 +420,6 @@ jQuery(document).ready(function($) {
 	$('#border-width').on('change', function() {
 		border_width = $(this).val();
 		vars['myChart_' + chartCount].data.datasets[0].borderWidth = border_width;
-		vars['myChart_' + chartCount].data.datasets[0].pointBorderWidth = border_width;
 		vars['myChart_' + chartCount].update();
 		createCode();
 	});
@@ -475,13 +522,6 @@ jQuery(document).ready(function($) {
 		createCode();
 	});
 
-	// TOGGLE FIELDS DEPENDING ON CHART TYPE
-	
-	function toggleFields() {
-		$('.pie, .doughnut, .polararea, .bar, .horizontalBar, .line, .radar, .bubble').hide();
-		$('.' + chart_type).show();
-	} toggleFields();
-
 	// REMOVE FILL FOR LINE CHARTS (NOT TIED TO OPACITY)
 
 	$('#remove-fill').on('change', function() {
@@ -498,6 +538,54 @@ jQuery(document).ready(function($) {
 		vars['myChart_' + chartCount].update();
 		createCode();
 	});
+
+	// POINT SETTINGS FOR LINE CHARTS
+
+	$('#point-radius').on('change', function() {
+		point_radius = Math.abs($(this).val());
+		vars['myChart_' + chartCount].data.datasets[0].pointRadius = point_radius;
+		vars['myChart_' + chartCount].update();
+		checkPointRadius();
+		createCode();
+	});
+
+	$('#point-radius-h').on('change', function() {
+		point_radius_h = Math.abs($(this).val());
+		vars['myChart_' + chartCount].data.datasets[0].pointHoverRadius = point_radius_h;
+		vars['myChart_' + chartCount].update();
+		createCode();
+	});
+
+	$('#point-border-width').on('change', function() {
+		point_border_width = Math.abs($(this).val());
+		vars['myChart_' + chartCount].data.datasets[0].pointBorderWidth = point_border_width;
+		vars['myChart_' + chartCount].update();
+		createCode();
+	});
+
+	$('#point-border-width-h').on('change', function() {
+		point_border_width_h = Math.abs($(this).val());
+		vars['myChart_' + chartCount].data.datasets[0].pointHoverBorderWidth = point_border_width_h;
+		vars['myChart_' + chartCount].update();
+		createCode();
+	});
+
+	// HIDE OTHER POINT OPTIONS IF POINT RADIUS = 0
+
+	function checkPointRadius() {
+		if(point_radius == 0) {
+			$('.point-radius').hide();
+		} else {
+			$('.point-radius').show();
+		}
+	} checkPointRadius();
+
+	// TOGGLE FIELDS DEPENDING ON CHART TYPE
+	
+	function toggleFields() {
+		$('.pie, .doughnut, .polararea, .bar, .horizontalBar, .line, .radar, .bubble').hide();
+		$('.' + chart_type).show();
+	} toggleFields();
 
 	// CREATE A CHART
 
@@ -549,10 +637,10 @@ jQuery(document).ready(function($) {
 		            pointHoverBackgroundColor: point_bg_h,
 		            pointBorderColor: point_border,
 		            pointHoverBorderColor: point_border_h,
-		            pointBorderWidth: 1,
-		            pointHoverBorderWidth: 2,
-		            pointRadius: 3,
-		            pointHoverRadius: 5
+		            pointBorderWidth: point_border_width,
+		            pointHoverBorderWidth: point_border_width_h,
+		            pointRadius: point_radius,
+		            pointHoverRadius: point_radius_h
 		        }]
 		    },
 		    options: {
@@ -588,8 +676,14 @@ jQuery(document).ready(function($) {
 		}
 		code_text += "borderColor: ['" + rgba_borders.join("','") + "'],";
 		code_text += 'borderWidth: ' + border_width + ',';
-		if(chart_type == 'line' || chart_type == 'radar') {
-			code_text += 'pointBorderWidth: 1,pointHoverBorderWidth: 2,pointRadius: 3,pointHoverRadius: 5';
+		if(chart_type == 'line') {
+			code_text += 'pointBackgroundColor: \'' + point_bg + '\',';
+			code_text += 'pointHoverBackgroundColor: \'' + point_bg_h + '\',';
+			code_text += 'pointBorderColor: \'' + point_border + '\',';
+			code_text += 'pointHoverBorderColor: \'' + point_border_h + '\','; 
+			code_text += 'pointBorderWidth: 1,pointHoverBorderWidth: 2,';
+			code_text += 'pointRadius: ' + point_radius + ',';
+			code_text += 'pointHoverRadius: '+ point_radius_h + ',';
 		}
 		code_text += '}]'
 		code_text += '},';
@@ -604,14 +698,13 @@ jQuery(document).ready(function($) {
 		if(chart_type == 'polarArea') {
 			code_text += 'startAngle: ' + chart_rotation + ',';
 		}
-		if(chart_type == 'bar' || chart_type == 'horizontalBar') {
+		if(chart_type == 'bar' || chart_type == 'horizontalBar' || chart_type == 'line') {
 			code_text += 'scales: {xAxes: xaxes_settings,yAxes: yaxes_settings}';
 		}
 		code_text += '}';
 		code_text += '});';
 		code_text += '</script>';
 		$('#embed-code textarea').text(code_text);
-
 	} createCode();
 
 });

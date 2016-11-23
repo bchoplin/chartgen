@@ -41,7 +41,7 @@
 						<option value="doughnut">Doughnut Chart</option>
 						<option value="polarArea">Polar Area Chart</option>
 						<option value="bar">Bar Chart</option>
-						<option value="line">Line Chart</option>
+						<option value="line" selected>Line Chart</option>
 					</select>
 				</div>
 				<div class="field-wrapper bar horizontalBar">
@@ -72,6 +72,9 @@
 					<label for="chart-data">Data</label>
 					<input type="text" id="chart-data" value="15,35,50"/>
 				</div>
+				<div class="field-wrapper line more-data" id="data-toggle">
+					<label class="add-remove-wrap"><a href="#" id="add-data">+ add</a> <a href="#" id="remove-data">&ndash; remove</a></label>
+				</div>
 				<div class="field-wrapper">
 					<label for="chart-labels">Labels</label>
 					<input type="text" id="chart-labels" value="Label 1,Label 2,Label 3"/>
@@ -81,20 +84,11 @@
 					<div class="colors-wrap"></div>
 				</div>
 				<div class="field-wrapper line">
-					<label for="remove-fill">Remove Fill</label>
-					<label class="check-label"><input type="checkbox" id="remove-fill"/> Remove the fill for line charts.</label>
+					<label class="check-label"><input type="checkbox" id="remove-fill"/> Remove the fill for the line chart.</label>
 				</div>
 				<div class="field-wrapper">
 					<label for="border-color">Border Color<span>s</span></label>
 					<div class="border-colors-wrap"></div>
-				</div>
-				<div class="field-wrapper line radar">
-					<label for="point-bg">Point Colors</label>
-					<div class="input-wrap"><input type="color" id="point-bg" value="#ffffff"/><span>BG</span></div> <div class="input-wrap"><input type="color" id="point-border" value="#27a6b9"/><span>Border</span></div>
-				</div>
-				<div class="field-wrapper line radar">
-					<label for="point-border">Point Hover Colors</label>
-					<div class="input-wrap"><input type="color" id="point-bg-h" value="#ffffff"/><span>BG</span></div> <div class="input-wrap"><input type="color" id="point-border-h" value="#484848"/><span>Border</span></div>
 				</div>
 				<div class="field-wrapper">
 					<label for="chart-border-width">Border Width (px)</label>
@@ -140,6 +134,34 @@
 				<div class="field-wrapper bar line">
 					<label for="yaxes-step">Y Axes Step Size</label>
 					<input type="number" id="yaxes-step" min="1" value="10"/>
+				</div>
+				<div class="field-wrapper line">
+					<label for="point-radius">Point Radius (px)</label>
+					<input type="number" min="0" max="10" id="point-radius" value="3"/>
+					<p class="description">Choose a pixel value between 0 and 10.</p>
+				</div>
+				<div class="field-wrapper line point-radius">
+					<label for="point-radius-h">Point Radius Hover (px)</label>
+					<input type="number" min="0" max="20" id="point-radius-h" value="5"/>
+					<p class="description">Choose a pixel value between 0 and 20.</p>
+				</div>
+				<div class="field-wrapper line point-radius">
+					<label for="point-border-width">Point Border Width (px)</label>
+					<input type="number" min="0" max="10" id="point-border-width" value="1"/>
+					<p class="description">Choose a pixel value between 0 and 10.</p>
+				</div>
+				<div class="field-wrapper line point-radius">
+					<label for="point-border-width-h">Point Border Width Hover (px)</label>
+					<input type="number" min="0" max="20" id="point-border-width-h" value="2"/>
+					<p class="description">Choose a pixel value between 0 and 20.</p>
+				</div>
+				<div class="field-wrapper line point-radius">
+					<label for="point-bg">Point Colors</label>
+					<div class="input-wrap"><input type="color" id="point-bg" value="#ffffff"/><span>BG</span></div> <div class="input-wrap"><input type="color" id="point-border" value="#27a6b9"/><span>Border</span></div>
+				</div>
+				<div class="field-wrapper line point-radius">
+					<label for="point-border">Point Hover Colors</label>
+					<div class="input-wrap"><input type="color" id="point-bg-h" value="#ffffff"/><span>BG</span></div> <div class="input-wrap"><input type="color" id="point-border-h" value="#484848"/><span>Border</span></div>
 				</div>
 			</form>
 		</header><!--/side-title-->
