@@ -37,6 +37,7 @@ jQuery(document).ready(function($) {
 	// SET INITIAL INPUT VALUES
 
 	var chart_type = $('#chart-type').val(),
+		chart_title = $('#chart-title').val(),
 		bar_type = $('#bar-type').val(),
 		chart_width = $('#chart-width').val(),
 		chart_responsive = $('#chart-responsive').val(),
@@ -81,6 +82,14 @@ jQuery(document).ready(function($) {
 		updateColorFields();
 		createChart();
 		toggleFields();
+	});
+
+	$('#chart-title').on('change', function() {
+		chart_title = $(this).val();
+		vars['myChart_' + chartCount].options.title.display = true;
+		vars['myChart_' + chartCount].options.title.text = chart_title;
+		vars['myChart_' + chartCount].update();
+		createCode();
 	});
 
 	// BAR CHART TYPE
@@ -645,6 +654,10 @@ jQuery(document).ready(function($) {
 		    },
 		    options: {
 		    	responsive: chart_responsive,
+		    	title: {
+		    		display: false,
+		    		text: chart_title
+		    	},
 	    		cutoutPercentage: chart_cutout,
 	    		rotation: chart_rotation,
 	    		startAngle: chart_rotation,
@@ -681,7 +694,8 @@ jQuery(document).ready(function($) {
 			code_text += 'pointHoverBackgroundColor: \'' + point_bg_h + '\',';
 			code_text += 'pointBorderColor: \'' + point_border + '\',';
 			code_text += 'pointHoverBorderColor: \'' + point_border_h + '\','; 
-			code_text += 'pointBorderWidth: 1,pointHoverBorderWidth: 2,';
+			code_text += 'pointBorderWidth: ' + point_border_width + ',';
+			code_text += 'pointHoverBorderWidth: ' + point_border_width_h + ',';
 			code_text += 'pointRadius: ' + point_radius + ',';
 			code_text += 'pointHoverRadius: '+ point_radius_h + ',';
 		}
@@ -689,6 +703,12 @@ jQuery(document).ready(function($) {
 		code_text += '},';
 		code_text += 'options: {';
 		code_text += 'responsive: ' + chart_responsive + ',';
+		if(chart_title != '') {
+			code_text += 'title: {';
+				code_text += 'display: true,';
+				code_text += 'text: \'' + chart_title + '\'';
+			code_text += '},';
+		}
 		if(chart_type == 'pie' || chart_type == 'doughnut') {
 			code_text += 'cutoutPercentage: ' + chart_cutout + ',';
 		}
