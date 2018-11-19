@@ -118,7 +118,10 @@ h3 {
 
 	&.more-data {
 		margin: -0.75em 0 1em;
-		font-size: 12px;
+
+		label {
+			font-size: 12px;
+		}
 	}
 }
 
@@ -188,5 +191,5 @@ select {
 }
 
 .more-data {
-	input+input { margin-top: 0.6em; }
+	input+input { margin-top: 0.25em; }
 }

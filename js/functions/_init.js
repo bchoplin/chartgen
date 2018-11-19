@@ -59,6 +59,8 @@ jQuery(document).ready(function($) {
 		point_radius_h = Math.abs($('#point-radius-h').val()),
 		point_border_width = Math.abs($('#point-border-width').val()),
 		point_border_width_h = Math.abs($('#point-border-width-h').val()),
+		xaxes_settings = '',
+		yaxes_settings = '',
 		no_bg = false,
 		data_count = 1;
 
@@ -594,6 +596,7 @@ jQuery(document).ready(function($) {
 	function toggleFields() {
 		$('.pie, .doughnut, .polararea, .bar, .horizontalBar, .line, .radar, .bubble').hide();
 		$('.' + chart_type).show();
+		console.log(chart_type);
 	} toggleFields();
 
 	// CREATE A CHART
@@ -601,7 +604,7 @@ jQuery(document).ready(function($) {
 	function createChart() {
 		//set up axes for bar charts
 		if(chart_type == 'bar' || chart_type == 'horizontalBar') {
-			var xaxes_settings =
+			xaxes_settings =
 				[{
 					ticks: {
 						min: chart_x_min,
@@ -609,7 +612,16 @@ jQuery(document).ready(function($) {
 	                	stepSize: chart_x_step
 	                }
 				}];
-			var yaxes_settings =
+			yaxes_settings =
+				[{
+	                ticks: {
+	                	min: chart_y_min,
+	                	max: chart_y_max,
+	                	stepSize: chart_y_step
+	                }
+	            }];
+		} else if(chart_type == 'line') {
+			yaxes_settings =
 				[{
 	                ticks: {
 	                	min: chart_y_min,
@@ -618,8 +630,8 @@ jQuery(document).ready(function($) {
 	                }
 	            }];
 		} else {
-			var xaxes_settings = '';
-			var yaxes_settings = '';
+			xaxes_settings = '';
+			yaxes_settings = '';
 		}
 
 		//if another chart was already created, destroy that one before we create a new one
@@ -719,7 +731,7 @@ jQuery(document).ready(function($) {
 			code_text += 'startAngle: ' + chart_rotation + ',';
 		}
 		if(chart_type == 'bar' || chart_type == 'horizontalBar' || chart_type == 'line') {
-			code_text += 'scales: {xAxes: xaxes_settings,yAxes: yaxes_settings}';
+			code_text += 'scales: {xAxes: ' + xaxes_settings + ',yAxes: ' + yaxes_settings + '}';
 		}
 		code_text += '}';
 		code_text += '});';
