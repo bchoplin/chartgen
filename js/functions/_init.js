@@ -61,6 +61,8 @@ jQuery(document).ready(function($) {
 		point_border_width_h = Math.abs($('#point-border-width-h').val()),
 		xaxes_settings = '',
 		yaxes_settings = '',
+		xaxes_settings_str = '',
+		yaxes_settings_str = '',
 		no_bg = false,
 		data_count = 1;
 
@@ -612,6 +614,7 @@ jQuery(document).ready(function($) {
 	                	stepSize: chart_x_step
 	                }
 				}];
+			
 			yaxes_settings =
 				[{
 	                ticks: {
@@ -620,6 +623,8 @@ jQuery(document).ready(function($) {
 	                	stepSize: chart_y_step
 	                }
 	            }];
+	        xaxes_settings_str = '[{ ticks: { min: ' + chart_x_min + ', max: ' + chart_x_max + ', stepSize: ' + chart_x_step + '}}]';
+	        yaxes_settings_str = '[{ ticks: { min: ' + chart_y_min + ', max: ' + chart_y_max + ', stepSize: ' + chart_y_step + '}}]';
 		} else if(chart_type == 'line') {
 			yaxes_settings =
 				[{
@@ -629,6 +634,7 @@ jQuery(document).ready(function($) {
 	                	stepSize: chart_y_step
 	                }
 	            }];
+	        yaxes_settings_str = '[{ ticks: { min: ' + chart_y_min + ', max: ' + chart_y_max + ', stepSize: ' + chart_y_step + '}}]';
 		} else {
 			xaxes_settings = '';
 			yaxes_settings = '';
@@ -683,6 +689,14 @@ jQuery(document).ready(function($) {
 
 	function createCode() {
 		var code_text = '';
+
+		if (xaxes_settings_str !== '') {
+			xaxes_settings_str = '[{ ticks: { min: ' + chart_x_min + ', max: ' + chart_x_max + ', stepSize: ' + chart_x_step + '}}]';
+		}
+
+		if (yaxes_settings_str !== '') {
+	    	yaxes_settings_str = '[{ ticks: { min: ' + chart_y_min + ', max: ' + chart_y_max + ', stepSize: ' + chart_y_step + '}}]';
+	    }
 		
 		code_text += '<div id="generatedChart-wrap" style="width:' + chart_width + '">';
 		code_text += '<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>';
@@ -730,8 +744,11 @@ jQuery(document).ready(function($) {
 		if(chart_type == 'polarArea') {
 			code_text += 'startAngle: ' + chart_rotation + ',';
 		}
-		if(chart_type == 'bar' || chart_type == 'horizontalBar' || chart_type == 'line') {
-			code_text += 'scales: {xAxes: ' + xaxes_settings + ',yAxes: ' + yaxes_settings + '}';
+		if(chart_type == 'bar' || chart_type == 'horizontalBar') {
+			code_text += 'scales: {xAxes: ' + xaxes_settings_str + ',yAxes: ' + yaxes_settings_str + '}';
+		}
+		if(chart_type == 'line') {
+			code_text += 'scales: {yAxes: ' + yaxes_settings_str + '}';
 		}
 		code_text += '}';
 		code_text += '});';
