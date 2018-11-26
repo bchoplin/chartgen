@@ -193,3 +193,21 @@ select {
 .more-data {
 	input+input { margin-top: 0.25em; }
 }
+
+.wrapper {
+	text-align: center;
+	padding: 30px;
+
+	h2 {
+		margin-bottom: 30px;
+	}
+
+	img {
+		max-width: 400px;
+		height: auto;
+	}
+
+	#generatedChart-wrap {
+		margin: 0 auto 30px;
+	}
+}
